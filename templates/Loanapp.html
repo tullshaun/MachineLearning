@@ -1,0 +1,114 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="static/data.css">
+</head>
+   <body>
+   <br>
+<p>
+<h1 align= "center">Credit Screening Application </h1> 
+ 
+</p>
+<br/>
+
+
+{% extends "layout.html" %}
+{% block content %}
+  <div class="home">
+    <h1>Credit Screening Application</h1>
+<HR COLOR="red" WIDTH="100%">
+<HR COLOR="yellow" WIDTH="100%">
+<HR COLOR="blue" WIDTH="100%">
+<HR COLOR="purple" WIDTH="100%">
+<HR COLOR="green" WIDTH="100%">
+
+		<form  action = "/result" method = "POST">
+	     <p>Married 
+		 <select name="married" id ="married">
+   <option value="">Select Status:</option>
+    <option value="1">Married</option>
+    <option value="0">Single</option>
+	<option value="0">Divorced</option>
+ </select></p>
+ 	     <p>Dependents 
+		 <select name="Dependents" id ="Dependents">
+   <option value="">Select Status:</option>
+    <option value="0">None</option>
+    <option value="1">One</option>
+	<option value="2">Two</option>
+	    <option value="3">Three</option>
+    <option value="4">Four</option>
+	<option value="5">Five</option>
+	    <option value="6">Six</option>
+    <option value="7">Seven</option>
+	 </select></p>
+		
+         <p>Graduate <select name="Graduate" id ="Graduate">
+   <option value="">Select Status:</option>
+    <option value="1">Yes</option>
+    <option value="0">No</option>
+	</select></p>
+         <p>Self_Employed <select name="Self_Employed" id ="Self_Employed">
+   <option value="">Select Status:</option>
+    <option value="1">Yes</option>
+    <option value="0">No</option>
+	</select></p>
+         <p>ApplicantIncome <input type = "text" name = "ApplicantIncome" /></p>
+         <p>CoapplicantIncome <input type ="text" name = "CoapplicantIncome" /></p>
+		 <p>LoanAmount <input type = "text" name = "LoanAmount" /></p>
+         <p>Loan_Amount_Term <select name="Loan_Amount_Term" id ="Loan_Amount_Term">
+   <option value="">Select Status:</option>
+    <option value="36">36</option>
+    <option value="60">60</option>
+	   <option value="120">120</option>
+    <option value="180">180</option>
+	   <option value="360">360</option>
+    <option value="400">400</option>
+	</select></p>
+         <p>Credit_History <select name="Credit_History" id ="Credit_History">
+   <option value="">Select Status:</option>
+    <option value="1">Yes</option>
+    <option value="0">No</option>
+	</select></p>
+         <p>PropertyOwner <select name="PropertyOwner" id ="PropertyOwner">
+   <option value="">Select Status:</option>
+    <option value="1">Yes</option>
+    <option value="0">No</option>
+	</select></p>
+         <p>Gender_Female <select name="Gender_Female" id ="Gender_Female">
+   <option value="">Select Status:</option>
+    <option value="1">Yes</option>
+    <option value="0">No</option>
+	</select></p>
+         <p>Gender_Male <select name="Gender_Male" id ="Gender_Male">
+   <option value="">Select Status:</option>
+    <option value="1">Yes</option>
+    <option value="0">No</option>
+	</select></p>
+	  <p>Model_Predictor <select name="Model_Predictor" id ="Model_Predictor">
+   <option value="">Select Model:</option>
+    <option value="1">KNN Algorithm</option>
+    <option value="2">Naive Bayes</option>
+	 <option value="3">Neural Network Model</option>
+	</select></p>
+         <p><input type = "submit" value = "submit" /></p>
+      </form>
+<HR COLOR="red" WIDTH="100%">
+<HR COLOR="yellow" WIDTH="100%">
+<HR COLOR="blue" WIDTH="100%">
+<HR COLOR="purple" WIDTH="100%">
+<HR COLOR="green" WIDTH="100%">   
+
+
+  </div>
+{% endblock %}  
+   </body>
+</html>
+
+
+
+
+
+
+<
+
+
