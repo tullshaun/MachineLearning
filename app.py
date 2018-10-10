@@ -1,17 +1,15 @@
 import numpy as np
 import pickle
-import json
 import requests
-from flask import Flask, jsonify, request,render_template
+from flask import Flask, request,render_template
 import pymysql
 import uuid
-from sklearn.externals import joblib
 import pandas as pd
 app = Flask(__name__)
 connection = pymysql.connect(
     host='localhost',
     user='root',
-    password='Nippon2020',
+    password='YourPasswordhere',
     db='loandb',
 )
 
@@ -31,8 +29,7 @@ def loanapp():
 def dashboard():
     cursor = connection.cursor()
     sql = "select married, dependents, graduate, Self_Employed, ApplicantIncome, CoapplicantIncome, LoanAmount, Loan_Amount_Term, Credit_History, PropertyOwner,Gender_female, Gender_male from loandb.vw_usrloans;"
-    # new_data = json.dumps({'Married': 0, 'Dependents': 5, 'Graduate': 1, 'Self_Employed': 1, 'ApplicantIncome': 5000,'CoapplicantIncome': 1500, 'LoanAmount': 120, 'Loan_Amount_Term': 60, 'Credit_History': 1,'PropertyOwner': 1, 'Gender_Female': 0, 'Gender_Male': 1})
-
+    
     cursor.execute(sql)
     #cursor.close()
     results =[]
@@ -90,10 +87,7 @@ def result():
         gender_female = request.form['Gender_Female']
         gender_male = request.form['Gender_Male']
         model_predictor = request.form['Model_Predictor']
-        #global mm
-        #if model_predictor ==1:
-        #    mm = my_model_pkl
-        #my_model = pickle.load(mm)
+
         cursor = connection.cursor()
         sql = ("INSERT INTO loandb.loans (Gender, married, dependents, graduate, Self_Employed, ApplicantIncome, CoapplicantIncome, LoanAmount, Loan_Amount_Term, Credit_History, PropertyOwner) values ('male',married, dependents, graduate, self_employed, applicantIncome, coapplicantIncome, loanamount,loan_amount_term, credit_history, propertyowner)")
         cursor.execute(sql)
@@ -138,13 +132,7 @@ def result():
 
 
 if __name__ == '__main__':
-     #if model_predictor ==1:
-     #    print('yes')
-     #my_model_pkl = open('pkl_objects/myClassifier.pkl', 'rb')
-     #my_model = pickle.load(my_model_pkl)
-     #my_nnmodel_pkl = open('pkl_objects/mynnlassifier.pkl', 'rb')
-     ##my_dtmodel = pickle.load(my_dtmodel_pkl)
-     ##my_gaumodel_pkl = open('pkl_objects/myGauclassifier.pkl', 'rb')
+
 
 
 
