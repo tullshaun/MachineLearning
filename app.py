@@ -9,7 +9,7 @@ app = Flask(__name__)
 connection = pymysql.connect(
     host='localhost',
     user='root',
-    password='YourPasswordhere',
+    password='passwordhere',
     db='loandb',
 )
 
@@ -63,11 +63,13 @@ def dashboard():
     pred = round(p, 2)
     if res == 1:
         res = 'Passed'
+        col = '#00FF00'
     else:
         res = 'Failed'
+        col = '#ffe6e6'
     values = [100 - pred, pred]
     #connection.close()
-    return render_template('dashboard.html',results=results,newdata =newdata,my_model =my_model,res=res,ndata=ndata,values=values,pred=pred,lab=lab,ds=ds)
+    return render_template('dashboard.html',results=results,newdata =newdata,col=col,my_model =my_model,res=res,ndata=ndata,values=values,pred=pred,lab=lab,ds=ds)
 
 @app.route('/result', methods=['POST','GET'])
 def result():
@@ -87,13 +89,18 @@ def result():
         gender_female = request.form['Gender_Female']
         gender_male = request.form['Gender_Male']
         model_predictor = request.form['Model_Predictor']
-
+        if gender_male == 1:
+            gender = 'male'
+        else:
+            gender = 'female'
         cursor = connection.cursor()
-        sql = ("INSERT INTO loandb.loans (Gender, married, dependents, graduate, Self_Employed, ApplicantIncome, CoapplicantIncome, LoanAmount, Loan_Amount_Term, Credit_History, PropertyOwner) values ('male',married, dependents, graduate, self_employed, applicantIncome, coapplicantIncome, loanamount,loan_amount_term, credit_history, propertyowner)")
-        cursor.execute(sql)
+        sql = (
+            "INSERT INTO loandb.loans (Gender, married, dependents, graduate, Self_Employed, ApplicantIncome, CoapplicantIncome, LoanAmount, Loan_Amount_Term, Credit_History, PropertyOwner) values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)")
+        cursor.execute(sql, (
+        gender, married, dependents, graduate, self_employed, applicantIncome, coapplicantIncome, loanamount,
+        loan_amount_term, credit_history, propertyowner))
         connection.commit()
         cursor.close()
-        #connection.close()
         s = np.array([married, dependents, graduate, self_employed, applicantIncome, coapplicantIncome, loanamount,loan_amount_term, credit_history, propertyowner, gender_female, gender_male], dtype=int).reshape(1, 12)
         testData = s.tolist()
         uid = uuid.uuid4()
@@ -118,11 +125,13 @@ def result():
         pred =round(p,2)
         if res ==1:
             res ='Passed'
+            col = '#00FF00'
         else:
             res='Failed'
+            col = '#ffe6e6'
         values =[100-pred,pred]
         result = request.form
-        return render_template("result.html", result=result, res=res,testData=testData,pred=pred,pr=pr,model_predictor = model_predictor,mp=mp,values=values,uid=uid)
+        return render_template("result.html", result=result,col=col, res=res,testData=testData,pred=pred,pr=pr,model_predictor = model_predictor,mp=mp,values=values,uid=uid)
 
 
 
