@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+<link rel="stylesheet" type="text/css" href="static/graph.css">
+</head>
+   <body>
+    <br>
+<p>
+<h1 align= "center">Credit Screening Results </h1> 
+ 
+</p>
+
+{% extends "layout.html" %}
+{% block content %}
+  <div class="home">
+    <p>
+	<h1>Credit Screening Application</h1>
+    </p>
+<p>
+<div id ='uid'><h4> Your Unique Reference ID is: {{uid}} </H4></div>
+</p>
+<HR COLOR="red" WIDTH="100%">
+<HR COLOR="yellow" WIDTH="100%">
+<HR COLOR="blue" WIDTH="100%">
+<HR COLOR="purple" WIDTH="100%">
+<HR COLOR="green" WIDTH="100%">
+      <table border = 1>
+<th>Married</th><th>Dependents</th><th>Graduate</th><th>Self Employed</th><th>Applicant Income</th><th>Coapplicant Income</th><th>Loan Amount</th><th>Loan Amount Term</th><th>Credit History</th><th>Property Owner</th><th>Female</th><th>Male</th>
+             {% for row in testData %}
+    <tr>
+	
+    {% for d in row %}
+        <td align="center">{{ d }}</td>
+    {% endfor %}
+    </tr>
+{% endfor %}
+      </table>
+ <HR COLOR="red" WIDTH="100%">
+<HR COLOR="yellow" WIDTH="100%">
+<HR COLOR="blue" WIDTH="100%">
+<HR COLOR="purple" WIDTH="100%">
+<HR COLOR="green" WIDTH="100%">
+
+
+<div id="Div" style="width: 30%" class="chart">
+        <canvas id="myChart" height="150" width="200"></canvas>
+    </div>
+
+    <div id="Div2" style="width: 30%" class="chart">
+        <canvas id="myChart2" height="150" width="200"></canvas>
+    </div>
+	
+
+	    <div id="Div4" style="width: 30%" class="chart">
+        <canvas id="myChart4" height="150" width="200"></canvas>
+    </div>
+
+<script>
+// create  chart function. if array for property populated, then pass variables to Chart function to create the relevant chart :
+
+
+myFunction()
+
+
+function myFunction()
+{
+
+var lab
+var chrt
+
+
+ds = [0.636,0.342,0.145,0.123,0.119,0.077,0.069,0.013,0.006,0,0];
+mlabels =['PropertyOwner','Credit_History','Dependents','Graduate','Married','CoapplicantIncome','ApplicantIncome','LoanAmount','Gender','Self_Employed','Loan_Amount_Term']
+lab = 'Credit Attribute Scoring'
+chrt = 'myChart'
+chrttype ='horizontalBar'
+dis = true
+legdis = false
+chartFunction(mlabels,chrttype,chrt,lab,ds,dis,legdis)
+
+
+ds = [1,1,1,1,1];
+mlabels =['PropertyOwner','Credit_History','Dependents','Graduate','Married']
+lab = 'Top 5 Credit Attribute Values'
+chrt = 'myChart2'
+chrttype ='radar'
+dis = true
+legdis = false
+chartFunction(mlabels,chrttype,chrt,lab,ds,dis,legdis)
+
+
+
+
+ds = [{% for item in values %}
+                      {{item}},
+                    {% endfor %}];
+mlabels =['Default','Credit']
+lab = 'Prediction on Customer'
+chrt = 'myChart4'
+chrttype ='doughnut'
+dis = true
+legdis = true
+chartFunction(mlabels,chrttype,chrt,lab,ds,dis,legdis)
+
+
+function chartFunction(mlabels,chrttype,chrt,lab, ds, dis, legdis) {
+var ctx = document.getElementById(chrt).getContext('2d');
+var myChart = new Chart(ctx, {
+    type: chrttype,
+    data: {
+		
+        labels: mlabels,
+        datasets: [{
+            label: lab,
+			backgroundColor: 'rgba(159,170,174,0.8)',
+            data: ds,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+ 	 options: {
+		 legend: { display: legdis },
+      title: {
+        display: dis,
+        text: lab
+      }
+
+   } 
+ 
+});
+}
+}
+
+</script>
+
+<table width="100%"  cellpadding="1" border="1" align="center">
+<tr>
+<th bgcolor="#D3D3D3">Loan Status</th>
+</tr>
+<tr>
+<td bgcolor="{{col}}" align="center"><h4><em>{{res}}</em></h4><h4><em>{{pred}} % Credit Confidence </em></h4></td>
+</tr>
+</table>
+{% endblock %}
+</body>
+</html>
