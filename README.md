@@ -8,7 +8,7 @@
 
 ## About the book
 <a target="_blank" href="https://www.amazon.co.uk/Machine-Learning-Creating-Solution-Beginners-ebook/dp/B07JB516BF/ref=sr_1_3?ie=UTF8&qid=1543154677&sr=8-3&keywords=machine+learning+for+absolute+beginners">
-  <img src="https://github.com/tullshaun/MachineLearning/img/book.jpg" alt="Book Cover" width="200" align="left"/>
+  <img src="/img/book.jpg" alt="Book Cover" width="200" align="left"/>
 </a>
 
 
