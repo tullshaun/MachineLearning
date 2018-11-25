@@ -11,6 +11,7 @@
   <img src="https://github.com/tullshaun/MachineLearning/img/book.jpg" alt="Book Cover" width="200" align="left"/>
 </a>
 
+
 The 21st Century has seen an explosion in data availability and the rise in processing power of computers; self-driving cars, critical illness diagnosis and predicting fraud, Machine Learning has finally come of age. This book will describe step by step, how to take a dataset and create a machine learning model and deploy this to a web application. 
 
 What this book is:
